@@ -1,0 +1,9 @@
+import laPorota.*
+
+describe "Tests de la porota" {
+
+  test "Test" {
+    assert.equals(1,1)
+  }
+
+}
