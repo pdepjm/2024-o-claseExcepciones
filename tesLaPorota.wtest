@@ -1,9 +1,39 @@
 import laPorota.*
 
 describe "Tests de la porota" {
-
-  test "Test" {
-    assert.equals(1,1)
+    const debitoDeFacu = new TarjetaDeDebito(saldoDisponible = 0)
+    const facu = new Comprador(medioDePago = debitoDeFacu)
+  test "Cuando vendo bajo el stock" {
+    const creditoDePepe = new TarjetaDeCredito()
+    const pepe = new Comprador(medioDePago = creditoDePepe)
+    laPorota.vender(10, pepe)
+    assert.equals(90, laPorota.stock())
   }
+  
+  test "Cuando vendo se usa el medio de pago" {
+    assert.equals(1, 2)
+  }
+  
+  test "Cuando no puedo vender, me entero de la razón" {
+    assert.throwsExceptionWithMessage("No hay saldo", { laPorota.vender(1, facu) })
+  }
+  
+  test "Cuando no hay fondos, no se descuente el stock" {
+    assert.throwsException({ laPorota.vender(1, facu) })
+    assert.equals(100, laPorota.stock())
+  }
+  
+  test "Cuando no puedo vender, el cliente no debe pagar" {
+    assert.equals(1, 2)
+  }
+}
 
+describe "Tests de Medios de pago" {
+  test "Cuando se paga con credito aumenta la deuda " {
+    assert.equals(1, 2)
+  }
+  
+  test "Cuando se paga con debti reduce el saldo " {
+    assert.equals(1, 2)
+  }
 }
